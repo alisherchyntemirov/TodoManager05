@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
         });
 
         initAdapter();
-
     }
     private void initAdapter() {
         TaskAdapter adapter = new TaskAdapter(list);
