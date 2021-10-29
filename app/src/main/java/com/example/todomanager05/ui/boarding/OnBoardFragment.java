@@ -41,9 +41,11 @@ public class OnBoardFragment extends Fragment {
             switch (position){
                 case 0:
                     binding.titleTv.setText("Приветствую");
+                    binding.startBtn.setVisibility(View.GONE);
                     break;
                 case 1:
                     binding.titleTv.setText("Второй экран");
+                    binding.startBtn.setVisibility(View.GONE);
                     break;
                 case 2:
                     binding.titleTv.setText("Третий экран");
