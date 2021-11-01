@@ -24,11 +24,13 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.FragmentCreateTaskBinding;
+import com.example.todomanager05.utils.App;
 import com.example.todomanager05.utils.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class CreateTaskFragment extends Fragment {
     private FragmentCreateTaskBinding binding;
@@ -36,6 +38,7 @@ public class CreateTaskFragment extends Fragment {
     String userChoosedDate;
     String time;
     String image;
+    List<TaskModel> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,10 +65,12 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 userTask = binding.taskEd.getText().toString();
-                TaskModel model = new TaskModel(R.color.purple_200,userTask,userChoosedDate+"/"+time,image);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(Constants.USER_TASK, model);
-                navController.navigate(R.id.nav_home, bundle);
+              TaskModel model = new TaskModel(R.color.purple_200,userTask,userChoosedDate+"/"+time,image);
+ //             Bundle bundle = new Bundle();
+//              bundle.putSerializable(Constants.USER_TASK, model);
+                App.getInstance().getDateBase().taskDao().insert(model);
+//App.getInstance().showToast("Hello word");
+                navController.navigate(R.id.nav_home);
             }
         });
         binding.addImage.setOnClickListener(new View.OnClickListener() {
@@ -116,3 +121,18 @@ public class CreateTaskFragment extends Fragment {
         binding = null;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

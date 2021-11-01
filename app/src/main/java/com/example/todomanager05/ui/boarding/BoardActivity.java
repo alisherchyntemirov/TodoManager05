@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.todomanager05.MainActivity;
 import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.ActivityBoardBinding;
+import com.example.todomanager05.utils.App;
 import com.example.todomanager05.utils.Constants;
 
 public class BoardActivity extends AppCompatActivity {
@@ -38,3 +39,21 @@ public class BoardActivity extends AppCompatActivity {
         binding.wormDotsIndicator.setViewPager(binding.viewPagerBoard);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

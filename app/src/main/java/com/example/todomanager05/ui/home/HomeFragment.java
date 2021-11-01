@@ -19,6 +19,7 @@ import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.FragmentHomeBinding;
 import com.example.todomanager05.ui.create.TaskAdapter;
 import com.example.todomanager05.ui.create.TaskModel;
+import com.example.todomanager05.utils.App;
 import com.example.todomanager05.utils.Constants;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,10 +43,11 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
 
-        if (getArguments() != null) {
-            model = (TaskModel) getArguments().getSerializable(Constants.USER_TASK);
-            list.add(model);
-        }
+//        if (getArguments() != null) {
+//            model = (TaskModel) getArguments().getSerializable(Constants.USER_TASK);
+//            list.add(model);
+//        }
+
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,8 +57,13 @@ public class HomeFragment extends Fragment {
 
         initAdapter();
     }
+
+    private ArrayList<TaskModel> getDateFromDateBase() {
+     return (ArrayList<TaskModel>) App.getInstance().getDateBase().taskDao().getAll();
+    }
+
     private void initAdapter() {
-        TaskAdapter adapter = new TaskAdapter(list);
+        TaskAdapter adapter = new TaskAdapter(getDateFromDateBase());
         binding.taskRecycler.setAdapter(adapter);
     }
 
