@@ -1,5 +1,7 @@
 package com.example.todomanager05.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +16,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todomanager05.OnItemClickListener;
 import com.example.todomanager05.R;
 import com.example.todomanager05.databinding.FragmentHomeBinding;
 import com.example.todomanager05.ui.create.TaskAdapter;
@@ -31,7 +36,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     TaskModel model;
-    ArrayList<TaskModel> list = new ArrayList<>();
+    TaskAdapter adapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -43,10 +48,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
 
-//        if (getArguments() != null) {
-//            model = (TaskModel) getArguments().getSerializable(Constants.USER_TASK);
-//            list.add(model);
-//        }
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +57,37 @@ public class HomeFragment extends Fragment {
         });
 
         initAdapter();
+        alertDialog();
     }
 
+
     private ArrayList<TaskModel> getDateFromDateBase() {
-     return (ArrayList<TaskModel>) App.getInstance().getDateBase().taskDao().getAll();
+        return (ArrayList<TaskModel>) App.getInstance().getDateBase().taskDao().getAll();
     }
 
     private void initAdapter() {
-        TaskAdapter adapter = new TaskAdapter(getDateFromDateBase());
+        adapter = new TaskAdapter(getDateFromDateBase());
         binding.taskRecycler.setAdapter(adapter);
     }
+    private void alertDialog() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onLongClick(TaskModel model) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Важное сообщение!")
+                        .setMessage("Хотите удалить?!")
+                        .setNegativeButton("No", null)
+                        .setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                App.getInstance().getDateBase().taskDao().delete(model);
+                                adapter.delete(model);
+                            }
+                        });
+                builder.show();
+            }
+        });
+    }
+
 
     @Override
     public void onDestroyView() {

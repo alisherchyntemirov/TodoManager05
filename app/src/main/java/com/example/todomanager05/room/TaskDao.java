@@ -1,6 +1,7 @@
 package com.example.todomanager05.room;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -17,4 +18,6 @@ public interface TaskDao {
     @Insert
     void insert(TaskModel taskModel);
 
+    @Delete
+    void delete(TaskModel model);
 }

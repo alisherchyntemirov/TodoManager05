@@ -12,33 +12,22 @@ public class App extends Application {
     private DateBase dateBase;
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
-        instance=this;
-        dateBase = Room.databaseBuilder(this,DateBase.class,"tododatabase").allowMainThreadQueries().build();
+        instance = this;
+        dateBase = Room.databaseBuilder(this, DateBase.class, "tododatabase").allowMainThreadQueries().build();
     }
-    public void showToast(String text){
+
+    public void showToast(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-    public static App getInstance(){
+
+    public static App getInstance() {
         return instance;
     }
-    public DateBase getDateBase(){
+
+    public DateBase getDateBase() {
         return dateBase;
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
