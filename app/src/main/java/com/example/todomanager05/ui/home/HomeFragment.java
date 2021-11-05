@@ -48,18 +48,17 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
 
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.createTaskFragment);
+                navController.navigate(R.id.action_nav_home_to_createTaskFragment);
             }
+
         });
 
         initAdapter();
         alertDialog();
     }
-
 
     private ArrayList<TaskModel> getDateFromDateBase() {
         return (ArrayList<TaskModel>) App.getInstance().getDateBase().taskDao().getAll();
@@ -87,7 +86,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public void onDestroyView() {

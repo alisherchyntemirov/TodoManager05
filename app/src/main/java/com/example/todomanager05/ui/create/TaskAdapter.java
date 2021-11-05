@@ -31,12 +31,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         list.remove(model);
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ItemTaskBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new TaskViewHolder(binding);
     }
+
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         holder.onFill(list.get(position));

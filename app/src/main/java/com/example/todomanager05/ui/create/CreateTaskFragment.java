@@ -66,16 +66,13 @@ public class CreateTaskFragment extends Fragment {
             public void onClick(View view) {
                 userTask = binding.taskEd.getText().toString();
               TaskModel model = new TaskModel(R.color.purple_200,userTask,userChoosedDate+"/"+time,image);
- //             Bundle bundle = new Bundle();
-//              bundle.putSerializable(Constants.USER_TASK, model);
                 App.getInstance().getDateBase().taskDao().insert(model);
-//App.getInstance().showToast("Hello word");
                 navController.navigate(R.id.nav_home);
             }
         });
         binding.addImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+             public void onClick(View view) {
                 mGetContent.launch("image/*");
             }
         });
@@ -114,25 +111,9 @@ public class CreateTaskFragment extends Fragment {
         }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE)).show();
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
